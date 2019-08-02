@@ -591,7 +591,7 @@
 		<26 512 0 5407000>,    // 8 bus=1353
 		<26 512 0 6215000>,    // 9 bus=1555
 		<26 512 0 7211000>,    // 10 bus=1804
-		<26 512 0 8527000>;    // 11 bus=2133
+		<26 512 0 8363000>;    // 11 bus=2092
 
 	qcom,initial-pwrlevel = <5>;
 
@@ -605,7 +605,7 @@
 
 		qcom,gpu-pwrlevel@0 {
 			reg = <0>;
-			qcom,gpu-freq = <836000000>;
+			qcom,gpu-freq = <830000000>;
 			qcom,bus-freq = <11>;
 			qcom,bus-min = <11>;
 			qcom,bus-max = <11>;
