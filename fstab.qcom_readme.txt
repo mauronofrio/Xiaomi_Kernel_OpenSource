@@ -1,0 +1,13 @@
+This file has to be inserted into the ROM in vendor/etc/fstab.qcom, possibly 1 other place.
+The best way to do this would be to leverage the pre-existing script that modifies all instances of this using AK3, disable dm-verity located here:
+https://forum.xda-developers.com/android/software/universal-dm-verity-forceencrypt-t3817389
+Sourcecode: https://github.com/Zackptg5/Disable_Dm-Verity_ForceEncrypt 
+
+This is flashed after the kernel is flashed with Magisk and modifies fstab.qcom
+The included fstab.qcom also makes barrier=0 instead of barrier=1 for speed improvements so EXT4 should also be faster per Pappschlumpf of the super tweaked OP7 PRO kernel.  He said he uses that
+instead of F2FS and it brings great improvement, only enabled on data and cache
+There is no reason to use F2F2 or speed improvements on the other partitions as it doesn't help.
+
+Note that also this build has not been confirmed to work on 9.8.1 Xiaomi as of yet
+The entire source code here is for China based ROMs (Xiaomi.eu, MIUI, RevOS) and hasn't been tested
+On anything except MIUI and Xiaomi.eu (pre 9.8.1)
