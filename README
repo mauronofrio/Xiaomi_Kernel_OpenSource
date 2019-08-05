@@ -1,5 +1,44 @@
-Linux kernel
-============
+Android Linux kernel - Mi9
+==========================
+
+Note this is a patched version of the original source code for the Xiaomi Mi9, and has only been tested on MIUI and Xiaomi.eu.
+The sourcecode on the Xiaomi website will not compile as it is missing many flags and patches.
+
+In it's current state, this version can be compiled via Clang (QCOM Clang in the case of root directory file QClang8_Build_F2FS).
+This also has several additional features over the stock implementation.  Note in order to use these functions, the kernel must 1)
+be compiled from source 2) packed into an existing boot.img - the easiest way is to use Android Image Kitchen available on XDA
+3) flashed to the device 4) patched with Magisk 5) a kernel manager which supports the added functions must be installed 
+(APK for SmartPack or Google PlayStore for EX Kernel Manager or FK Kernel Manager) and the settings must be turned ON.
+
+1) Fsync toggle - enable / disable.  This an be set with any Kernel manager - SmartPack is a good free one although I use
+FK kernel manager generally - not for its ease of use but because I have it.  Note that disabling Fsync improves ROM write 
+performance but can be dangerous if the system crashes - in a worst case sceanrio, the phone could be bricked.  I've used 
+for 4 months on the Mi9 without any issues (disabled) but your experience may differ.  Fsync can be read about online, it's 
+really a hack more or less to get over slow write speeds.  This setting is usually under Misc or I/O.
+
+2) GPU can be Over Clocked to 830ghz.  This frequency was chosen because of how it behaves on my Mi 9 with Fsync disabled.
+Faster frequencies result in graphics issues or crashing; 830mhz seems to be the ideal setting where graphics are smooth
+and no crashing or artifacts occur on the GPU rendering.  FK Kernel Manager is able to set a maximum GPU that sticks
+whereas the method used by SmartPack does not max out the CPU to the selected freequency.  Still a workaround is to use
+the dialcode for ROMS based on Global Dev variants - dial *#*#8106#*#* and turn on GPU Overfreq Mode.  
+
+3) F2FS support is enable on this kernel.  What does this mean?  F2FS is a fast filesystem compared to EXT4.  Nearly all ROMs
+and kernels will default to EXT4 as it is a stable and long living format.  The kernel here can run EXT4 or F2F2 both are 
+enabled in the cepheus_user_defconfig for the Mi9 device.
+
+The current issue with F2F2 and the Mi9 is there is not a compatible TWRP to format the data partition and mount it.  Attempting
+to do so without a compatible recovery will likely render your device unreadable (data partition). I have had to reinstall
+the factory software from Xiaomi to reconstruct the damage done by formatting an F2F2 data partition in TWRP.  Once formatted, 
+you can not write to it.  Now an expert user may be able to use a Linux terminal and fastoot / adb to mount the partition, but
+a guide is not available online that I am aware of.
+
+The additional setting that must be changed (once a compatible TWRP is created) is to replace all instances of fstab.qcom with
+the verison located in the root directory here.  There is a readme.txt with the same prefix.  On the Mi9, there is at least one
+copy of the file in /vendor/etc/fstab.qcom.  There is 1 other location which must be changed as well that you should find.
+The additional location can be found by running in TWRP or Magisk Manager DM-Verity script in the China recovery or from Magisk.  
+Once found, that file could be changed and permissions changed with CHMOD to avoid being overwritten on the next boot.
+
+
 
 This file was moved to Documentation/admin-guide/README.rst
 
