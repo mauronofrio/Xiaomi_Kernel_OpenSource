@@ -16,7 +16,7 @@
 		compatible = "operating-points-v2";
 
 		opp-833000000 {
-			opp-hz = /bits/ 64 <833000000>;
+			opp-hz = /bits/ 64 <830000000>;
 			opp-microvolt = <RPMH_REGULATOR_LEVEL_TURBO>;
 		};
 
